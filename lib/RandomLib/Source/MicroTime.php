@@ -68,6 +68,7 @@ final class MicroTime implements \RandomLib\Source {
         $state      .= getmypid() . memory_get_usage();
         $state      .= serialize($_ENV);
         $state      .= serialize($_SERVER);
+        // TODO Report issue. This fails when used inside our test suite with an error like "ArrayObject::serialize() must return a string or NULL" and "Serialization of 'Closure' is not allowed".
         //$state      .= serialize(debug_backtrace(false));
         self::$state = hash('sha512', $state, true);
         if (is_null(self::$counter)) {
